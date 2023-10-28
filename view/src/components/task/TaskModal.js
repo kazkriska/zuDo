@@ -15,8 +15,9 @@ const TaskModal = ({taskData, taskOptions}) => {
     setVisible(false);
   };
 
+
   return (
-    <div>
+    <div onDoubleClick={(e) => e.stopPropagation()}>
       <button onClick={show}>Edit</button>
       <Rodal visible={visibile} onClose={hide}>
         <h3>Todo Properties</h3>
