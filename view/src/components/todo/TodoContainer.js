@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import TaskDisplay from './TaskDisplay';
-import TaskForm from './TaskForm';
+import TodoDisplay from './TodoDisplay';
+import TodoForm from './TodoForm';
 
-const TaskContainer = ({ taskData, taskOptions }) => {
+const TodoContainer = ({ todoData, todoOptions }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [input, setInput] = useState(taskData.task);
+  const [input, setInput] = useState(todoData.task);
 
-  const { editTodoTask } = taskOptions;
+  const { editTodoTask } = todoOptions;
 
-  //handles editing existing task
+  //handles editing existing todo
   const handleSubmit = (e) => {
     e.preventDefault();
     const trimmedInput = input.trim();
     if (trimmedInput) {
-      editTodoTask(taskData.id, input);
+      editTodoTask(todoData.id, input);
       setIsEditing((state) => !state);
     }
   };
@@ -21,16 +21,16 @@ const TaskContainer = ({ taskData, taskOptions }) => {
   return (
     <div>
       {isEditing ? (
-        <TaskForm
+        <TodoForm
           handleSubmit={handleSubmit}
           inputValue={input}
           handleChange={(e) => setInput(e.target.value)}
           formButtonText={'Submit'}
         />
       ) : (
-        <TaskDisplay
-          taskData={taskData}
-          taskOptions={taskOptions}
+        <TodoDisplay
+          todoData={todoData}
+          todoOptions={todoOptions}
           handleDoubleClick={() => setIsEditing((state) => !state)}
         />
       )}
@@ -38,4 +38,4 @@ const TaskContainer = ({ taskData, taskOptions }) => {
   );
 };
 
-export default TaskContainer;
+export default TodoContainer;

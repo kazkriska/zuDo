@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
-import TaskPropertiesForm from './TaskPropertiesForm';
+import TodoPropertiesForm from './TodoPropertiesForm';
 
-// <TaskDisplay> will call this component and pass props to it
-const TaskModal = ({taskData, taskOptions}) => {
+// <TodoDisplay> will call this component and pass props to it
+const TodoModal = ({todoData, todoOptions}) => {
   const [visibile, setVisible] = useState(false);
 
   const show = () => {
@@ -21,10 +21,10 @@ const TaskModal = ({taskData, taskOptions}) => {
       <button onClick={show}>Edit</button>
       <Rodal visible={visibile} onClose={hide}>
         <h3>Todo Properties</h3>
-        <TaskPropertiesForm taskData={taskData} taskOptions={taskOptions} closeOnSubmit={hide} />
+        <TodoPropertiesForm todoData={todoData} todoOptions={todoOptions} closeOnSubmit={hide} />
       </Rodal>
     </div>
   );
 };
 
-export default TaskModal;
+export default TodoModal;

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import NewTaskBtn from './NewTaskBtn';
-import TaskForm from './TaskForm';
+import NewTodoBtn from './NewTodoBtn';
+import TodoForm from './TodoForm';
 import { v4 as uuidv4 } from 'uuid';
 
-const CreateNewTask = ({ category, taskOptions: { addTodo } }) => {
+const CreateNewTodo = ({ category, todoOptions: { addTodo } }) => {
   const [clicked, setClicked] = useState(false);
   const [input, setInput] = useState('');
  
-  //Handles adding new Task
+  //Handles adding new Todo
   const handleSubmit = (e) => {
     e.preventDefault();
     const trimmedInput = input.trim();
@@ -27,19 +27,19 @@ const CreateNewTask = ({ category, taskOptions: { addTodo } }) => {
 
   return (
     <div>
-      {/* if clicked is TRUE then show TaskForm else show NewTaskButton  */}
+      {/* if clicked is TRUE then show TodoForm else show NewTodoButton  */}
       {clicked ? (
-        <TaskForm
+        <TodoForm
           inputValue={input}
           handleChange={(e) => setInput(e.target.value)}
           handleSubmit={handleSubmit}
           formButtonText={'Add'}
         />
       ) : (
-        <NewTaskBtn handleClick={() => setClicked((state) => !state)} />
+        <NewTodoBtn handleClick={() => setClicked((state) => !state)} />
       )}
     </div>
   );
 };
 
-export default CreateNewTask;
+export default CreateNewTodo;

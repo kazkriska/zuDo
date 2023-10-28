@@ -1,18 +1,19 @@
 import React from 'react';
-import TaskContainer from './task/TaskContainer';
-import CreateNewTask from './task/CreateNewTask'
+import TodoContainer from './todo/TodoContainer';
+import CreateNewTodo from './todo/CreateNewTodo'
 
-const Column = ({ category, todos, taskOptions }) => {
+// <Column> is called by <App>
+const Column = ({ category, todos, todoOptions }) => {
   return (
     <div className="column">
       {todos.filter((todo) => todo.category === category).map((todo) => (
-        <TaskContainer
-          taskData={todo}
+        <TodoContainer
+          todoData={todo}
           key={todo.id}
-          taskOptions={taskOptions}
+          todoOptions={todoOptions}
         />
       ))}
-      <CreateNewTask taskOptions={taskOptions} category={category} />
+      <CreateNewTodo todoOptions={todoOptions} category={category} />
     </div>
   );
 };

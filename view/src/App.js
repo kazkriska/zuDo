@@ -2,11 +2,10 @@ import Column from './components/Column';
 import React, { useState } from 'react';
 import './App.css';
 
-//ee
 function App() {
   const [todos, setTodos] = useState([]);
 
-  const taskOptions = {
+  const todoOptions = {
     findTodo(id) {
       const todoToUpdate = todos.find((todo) => todo.id === id);
       return todoToUpdate;
@@ -19,21 +18,21 @@ function App() {
       setTodos(filteredTodos);
     },
     editTodoTask(id, newTaskValue) {
-      const todoToUpdate = taskOptions.findTodo(id);
+      const todoToUpdate = todoOptions.findTodo(id);
       if (todoToUpdate) {
         todoToUpdate.task = newTaskValue;
         setTodos([...todos])
       }
     },
     editTodoCategory(id, newCategory) {
-      const todoToUpdate = taskOptions.findTodo(id);
+      const todoToUpdate = todoOptions.findTodo(id);
       if (todoToUpdate) {
         todoToUpdate.category = newCategory;
         setTodos([...todos])
       }
     },
     editTodoDueDate(id, newDueDate) {
-      const todoToUpdate = taskOptions.findTodo(id);
+      const todoToUpdate = todoOptions.findTodo(id);
       if(todoToUpdate) {
         todoToUpdate.dueDate = newDueDate;
         setTodos([...todos])
@@ -44,10 +43,10 @@ function App() {
   console.table(todos); //for testing, remove later
   return (
     <div className="kanban-board">
-      <Column category={'today'} todos={todos} taskOptions={taskOptions} />
-      <Column category={'week'} todos={todos} taskOptions={taskOptions} />
-      <Column category={'month'} todos={todos} taskOptions={taskOptions} />
-      <Column category={'dumpster'} todos={todos} taskOptions={taskOptions} />
+      <Column category={'today'} todos={todos} todoOptions={todoOptions} />
+      <Column category={'week'} todos={todos} todoOptions={todoOptions} />
+      <Column category={'month'} todos={todos} todoOptions={todoOptions} />
+      <Column category={'dumpster'} todos={todos} todoOptions={todoOptions} />
     </div>
   );
 }

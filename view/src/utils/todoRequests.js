@@ -1,5 +1,5 @@
 export const createTodo = async (data) => {
-  const res = await fetch('/api/task/create', {
+  const res = await fetch('/api/todo/create', {
     method: 'POST',
     body: JSON.stringify(data), // JSON.stringify() will convert the data which might be an object or array into JSON String, this will then be parsed by bodyParser in the backend into a JS object
     headers: {
@@ -11,7 +11,7 @@ export const createTodo = async (data) => {
 
 // Gets ALL Todos
 export const readTodos = async () => {
-  const res = await fetch('/api/task', {
+  const res = await fetch('/api/todo', {
     method: 'GET',
   });
   return res.json();
@@ -19,14 +19,14 @@ export const readTodos = async () => {
 
 // Gets UNIQUE (1) Todo
 export const readTodo = async (_id) => {
-  const res = await fetch(`/api/task/${_id}`, {
+  const res = await fetch(`/api/todo/${_id}`, {
     method: 'GET',
   });
   return res.json();
 }
 
 export const updateTodo = async (_id, data) => {
-  const res = await fetch(`/api/task/${_id}`, {
+  const res = await fetch(`/api/todo/${_id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
     headers: {
@@ -37,7 +37,7 @@ export const updateTodo = async (_id, data) => {
 };
 
 export const deleteTodo = async (_id) => {
-  const res = await fetch(`/api/task/${_id}`, {
+  const res = await fetch(`/api/todo/${_id}`, {
     method: 'DELETE',
   });
   return res.json();

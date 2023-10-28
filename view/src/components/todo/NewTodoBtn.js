@@ -1,7 +1,7 @@
 import React from 'react';
 import '../style.css'
 
-const NewTaskBtn = ({handleClick}) => {
+const NewTodoBtn = ({handleClick}) => {
   return (
     <div className="std-box-component dashed-border" onMouseOver={handleClick}>
       <p className="text-defaultRegular">+ New</p>
@@ -9,4 +9,4 @@ const NewTaskBtn = ({handleClick}) => {
   );
 };
 
-export default NewTaskBtn;
+export default NewTodoBtn;
