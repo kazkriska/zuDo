@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TodoDisplay from './TodoDisplay';
 import TodoForm from './TodoForm';
+import { updateTodo } from '../../utils/todoRequests';
 
 const TodoContainer = ({ todoData }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -13,7 +14,7 @@ const TodoContainer = ({ todoData }) => {
     e.preventDefault();
     const trimmedInput = task.trim();
     if (trimmedInput) {
-      // editTodoTask(todoData.id, task);  
+      updateTodo(todoData.todo_id, {task})
       setIsEditing((state) => !state);
     }
   };

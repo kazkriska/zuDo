@@ -40,8 +40,6 @@ exports.update = async (req, res) => {
   const id = Number(req.params.id);
   let queryString = `UPDATE todo_db SET ${dynamicQuery(req.body)} WHERE todo_id = $1`;
   let queryValues = [id].concat(Object.values(req.body));
-  console.log(queryValues)
-  console.log(queryString)
   try {
     const queryResult = await pool.query(queryString, queryValues);
     return res.status(200).json(`Task with ID: ${id}, updated`);

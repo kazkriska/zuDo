@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { updateTodo } from '../../utils/todoRequests';
 
 // <TodoModal> will call this component
 const TodoPropertiesForm = ({ todoData, closeOnSubmit }) => {
@@ -7,8 +8,7 @@ const TodoPropertiesForm = ({ todoData, closeOnSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // editTodoCategory(todoData.id, category);
-    // editTodoDueDate(todoData.id, dueDate)
+    updateTodo(todoData.todo_id, {category, due_on})
     closeOnSubmit();
   };
   return (

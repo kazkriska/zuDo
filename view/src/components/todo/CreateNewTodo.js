@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NewTodoBtn from './NewTodoBtn';
 import TodoForm from './TodoForm';
+import { createTodo } from '../../utils/todoRequests';
 
 const CreateNewTodo = ({ category }) => {
   const [clicked, setClicked] = useState(false);
@@ -16,7 +17,7 @@ const CreateNewTodo = ({ category }) => {
         category: category,
         created_at: new Date().toLocaleString()
       };
-      // addTodo(todo);    UPDATE WITH API CALL
+      createTodo(todo);   
       setInput('');
       setClicked((state) => !state);
     }
