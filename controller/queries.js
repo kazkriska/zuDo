@@ -25,7 +25,7 @@ exports.readAll = async (req, res) => {
 
 exports.readUnique = async (req, res) => {
   const id = Number(req.params.id);
-  let queryString = 'SELECT * FROM todo_db WHERE task_id = $1';
+  let queryString = 'SELECT * FROM todo_db WHERE todo_id = $1';
   let queryValues = [id];
   try {
     const queryResult = await pool.query(queryString, queryValues);
@@ -35,12 +35,12 @@ exports.readUnique = async (req, res) => {
   }
 };
 
-// update function is just for testing purposes, later it will act as a middleware for several other functions where it executes re-insertian of all values
 exports.update = async (req, res) => {
-  const { task } = req.body;
   const id = Number(req.params.id);
-  let queryString = 'UPDATE todo_db SET task = $1 WHERE task_id = $2';
-  let queryValues = [task, id];
+  let queryString = `UPDATE todo_db SET ${dynamicQuery(req.body)} WHERE todo_id = $1`;
+  let queryValues = [id].concat(Object.values(req.body));
+  console.log(queryValues)
+  console.log(queryString)
   try {
     const queryResult = await pool.query(queryString, queryValues);
     return res.status(200).json(`Task with ID: ${id}, updated`);
@@ -51,7 +51,7 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
   const id = Number(req.params.id);
-  let queryString = 'DELETE FROM todo_db WHERE task_id = $1';
+  let queryString = 'DELETE FROM todo_db WHERE todo_id = $1';
   let queryValues = [id];
   try {
     const queryResult = await pool.query(queryString, queryValues);
@@ -60,3 +60,8 @@ exports.remove = async (req, res) => {
     return res.status(400).json({ error });
   }
 };
+
+// takes in an object, in this case key/value pairs of our todo object and then returns a string for querying, NOTE the function ADDS 2, so the todo_id can always be $1 in a query
+const dynamicQuery = (obj) => {
+  return Object.keys(obj).map((item, index) => `${item} = $${index+2}`).join(', ')
+}
