@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import NewTodoBtn from './NewTodoBtn';
 import TodoForm from './TodoForm';
-import { v4 as uuidv4 } from 'uuid';
 
-const CreateNewTodo = ({ category, todoOptions: { addTodo } }) => {
+const CreateNewTodo = ({ category }) => {
   const [clicked, setClicked] = useState(false);
   const [input, setInput] = useState('');
  
@@ -13,13 +12,11 @@ const CreateNewTodo = ({ category, todoOptions: { addTodo } }) => {
     const trimmedInput = input.trim();
     if (trimmedInput) {
       const todo = {
-        id: uuidv4(),
         task: input,
-        dateCreated: new Date().toLocaleString(),
         category: category,
-        dueDate: ''
+        created_at: new Date().toLocaleString()
       };
-      addTodo(todo);
+      // addTodo(todo);    UPDATE WITH API CALL
       setInput('');
       setClicked((state) => !state);
     }

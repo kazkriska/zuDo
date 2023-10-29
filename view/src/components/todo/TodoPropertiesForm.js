@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 
 // <TodoModal> will call this component
-const TodoPropertiesForm = ({ todoData, todoOptions, closeOnSubmit }) => {
-  const [selectedCategory, setSelectedCategory] = useState(todoData.category);
-  const [dueDate, setDueDate] = useState(todoData.dueDate);
+const TodoPropertiesForm = ({ todoData, closeOnSubmit }) => {
+  const [category, setCategory] = useState(todoData.category);
+  const [due_on, setDue_on] = useState(todoData.due_on);
 
-  const { editTodoCategory, editTodoDueDate } = todoOptions;
   const handleSubmit = (e) => {
     e.preventDefault();
-    editTodoCategory(todoData.id, selectedCategory);
-    editTodoDueDate(todoData.id, dueDate)
+    // editTodoCategory(todoData.id, category);
+    // editTodoDueDate(todoData.id, dueDate)
     closeOnSubmit();
   };
   return (
@@ -20,8 +19,8 @@ const TodoPropertiesForm = ({ todoData, todoOptions, closeOnSubmit }) => {
           <select
             name="todoCategory"
             id="todoCategory"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           >
             <option value="today">Today</option>
             <option value="week">Week</option>
@@ -34,8 +33,8 @@ const TodoPropertiesForm = ({ todoData, todoOptions, closeOnSubmit }) => {
             type="date"
             id="dueDate"
             name="dueDate"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
+            value={due_on}
+            onChange={(e) => setDue_on(e.target.value)}
           />
         </fieldset>
         <br />

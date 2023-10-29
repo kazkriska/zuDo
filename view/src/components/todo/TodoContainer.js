@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import TodoDisplay from './TodoDisplay';
 import TodoForm from './TodoForm';
 
-const TodoContainer = ({ todoData, todoOptions }) => {
+const TodoContainer = ({ todoData }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [input, setInput] = useState(todoData.task);
 
-  const { editTodoTask } = todoOptions;
+  // holds the state of the input which represents the todo's task value
+  const [task, setTask] = useState(todoData.task); 
 
   //handles editing existing todo
   const handleSubmit = (e) => {
     e.preventDefault();
-    const trimmedInput = input.trim();
+    const trimmedInput = task.trim();
     if (trimmedInput) {
-      editTodoTask(todoData.id, input);
+      // editTodoTask(todoData.id, task);  
       setIsEditing((state) => !state);
     }
   };
@@ -23,14 +23,13 @@ const TodoContainer = ({ todoData, todoOptions }) => {
       {isEditing ? (
         <TodoForm
           handleSubmit={handleSubmit}
-          inputValue={input}
-          handleChange={(e) => setInput(e.target.value)}
+          inputValue={task}
+          handleChange={(e) => setTask(e.target.value)}
           formButtonText={'Submit'}
         />
       ) : (
         <TodoDisplay
           todoData={todoData}
-          todoOptions={todoOptions}
           handleDoubleClick={() => setIsEditing((state) => !state)}
         />
       )}
